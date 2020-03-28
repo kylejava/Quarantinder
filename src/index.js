@@ -1,6 +1,6 @@
 import { connect, createLocalTracks } from 'twilio-video';
 
-const TOKEN = '';
+let TOKEN = '<REPLACE WITH YOUR ROOM TOKEN>';
 
 function mountTracks(tracks, elementId) {
   const container = document.getElementById(elementId);
@@ -18,6 +18,9 @@ function participantConnected(participant) {
     if (isSubscribed) {
       remote.appendChild(track.attach());
     }
+    if (track.kind === 'audio') {
+      console.log('AUDIO TRACK YAY');
+    }
   }
 }
 
@@ -33,9 +36,14 @@ function configureRoomEventHandlers(room) {
 
 async function joinRoom(roomName) {
   try {
-    const localTracks = await createLocalTracks({ audio: false, video: { width: 640 } });
+    const localTracks = await createLocalTracks({ audio: true, video: { width: 640 } });
     mountTracks(localTracks, 'local');
     const room = await connect(TOKEN, { name: roomName, tracks: localTracks });
+
+    room.localParticipant.audioTracks.forEach(audioTrack => {
+
+    });
+
     console.log(room.participants);
     console.log(`Successfully joined a Room: ${room}`);
     configureRoomEventHandlers(room);
