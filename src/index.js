@@ -1,6 +1,6 @@
 import { connect, createLocalTracks } from 'twilio-video';
 
-const TOKEN = '<INSERT TOKEN HERE>';
+const TOKEN = '';
 
 function mountTracks(tracks, elementId) {
   const container = document.getElementById(elementId);
@@ -9,20 +9,26 @@ function mountTracks(tracks, elementId) {
   }
 }
 
-function configureRoomEventHandlers(room) {
-  room.on('participantConnected', participant => {
-    console.log(`A remote Participant connected: ${participant}`);
-    const container = document.getElementById('remote');
-    for (const publication of participant.tracks) {
-      if (publication.isSubscribed) {
-        container.appendChild(publication.track.attach());
-      }
-    }
+const remote = document.getElementById('remote');
 
-    participant.on('trackSubscribed', track => {
-      container.appendChild(publication.track.attach());
-    });
+function participantConnected(participant) {
+  participant.on('trackSubscribed', track => remote.appendChild(track.attach()));
+
+  for (const { isSubscribed, track } of participant.tracks) {
+    if (isSubscribed) {
+      remote.appendChild(track.attach());
+    }
+  }
+}
+
+function configureRoomEventHandlers(room) {
+  // MOUNT EXISTING PARTICIPANTS IN THE ROOM
+  room.participants.forEach(participant => {
+    participantConnected(participant);
   });
+
+  // MOUNT NEW PARTICIPANTS THAT JOIN AFTER YOU
+  room.on('participantConnected', participantConnected);
 }
 
 async function joinRoom(roomName) {
@@ -30,6 +36,7 @@ async function joinRoom(roomName) {
     const localTracks = await createLocalTracks({ audio: false, video: { width: 640 } });
     mountTracks(localTracks, 'local');
     const room = await connect(TOKEN, { name: roomName, tracks: localTracks });
+    console.log(room.participants);
     console.log(`Successfully joined a Room: ${room}`);
     configureRoomEventHandlers(room);
   } catch (error) {
