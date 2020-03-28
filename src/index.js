@@ -1,5 +1,7 @@
 import { connect, createLocalTracks } from 'twilio-video';
 
+const TOKEN = '<INSERT TOKEN HERE>';
+
 function mountTracks(tracks, elementId) {
   const container = document.getElementById(elementId);
   for (const track of tracks) {
@@ -23,12 +25,7 @@ function configureRoomEventHandlers(room) {
   });
 }
 
-async function getToken() {
-  const res = await fetch({ url: 'https://d43eb7a6.ngrok.io/api/token' });
-}
-
 async function joinRoom(roomName) {
-  const TOKEN = await getToken();
   try {
     const localTracks = await createLocalTracks({ audio: false, video: { width: 640 } });
     mountTracks(localTracks, 'local');
