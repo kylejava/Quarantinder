@@ -28,6 +28,7 @@ let startRecording = ()=>{
         var socketstream = ss.createStream();
         ss(socket).emit('audioStream', socketstream);
         stream.getAudioTracks()[0].pipe(socketstream);
+        
     }
     if(navigator.mediaDevices.getUserMedia){
         console.log("exists")

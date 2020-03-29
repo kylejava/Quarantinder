@@ -1,4 +1,5 @@
 import { connect, createLocalTracks } from 'twilio-video';
+import axios from 'axios';
 
 const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTS2I4Y2ZkZjIxMjU2Mjc3ZDhiMGI4MDYzM2NkNTcwMzBhLTE1ODU0MzMwNjciLCJncmFudHMiOnsiaWRlbnRpdHkiOiJleGFtcGxlLXVzZXIiLCJ2aWRlbyI6eyJyb29tIjoiUm9vbSBUZXN0In19LCJpYXQiOjE1ODU0MzMwNjcsImV4cCI6MTU4NTQzNjY2NywiaXNzIjoiU0tiOGNmZGYyMTI1NjI3N2Q4YjBiODA2MzNjZDU3MDMwYSIsInN1YiI6IkFDYTM2MmJhYjUzYTQzNGM1ZmIzOGJjZTY1NmMzZDFiY2YifQ.PFlenkRObweEAFp8WN1a-UUhxlkEFlI1CzjNf1BOnBc';
 
@@ -52,9 +53,10 @@ let afterRoomConnect = room => {
   
   async function joinRoom(roomName) {
     try {
+      const accessToken =  await axios.get("https://us-central1-quarantinder-twilio-272520.cloudfunctions.net/twilio-room-create?username=" + localStorage.getItem("username"));
       const localTracks = await createLocalTracks({ audio: true, video: { width: 640 } });
       mountTracks(localTracks, 'local');
-      const room = await connect(TOKEN, { name: roomName, tracks: localTracks });
+      const room = await connect(accessToken, { name: roomName, tracks: localTracks });
       afterRoomConnect(room);
       console.log(room.participants);
       console.log(`Successfully joined a Room: ${room}`);
