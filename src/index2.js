@@ -53,10 +53,10 @@ let afterRoomConnect = room => {
   
   async function joinRoom(roomName) {
     try {
-      const accessToken =  await axios.get("https://us-central1-quarantinder-twilio-272520.cloudfunctions.net/twilio-room-create?username=" + localStorage.getItem("username"));
+      const accessObj =  await axios.get("https://us-central1-quarantinder-twilio-272520.cloudfunctions.net/twilio-room-create?username=" + localStorage.getItem("username"));
       const localTracks = await createLocalTracks({ audio: true, video: { width: 640 } });
       mountTracks(localTracks, 'local');
-      const room = await connect(accessToken, { name: roomName, tracks: localTracks });
+      const room = await connect(accessObj.accessToken, { name: roomName, tracks: localTracks });
       afterRoomConnect(room);
       console.log(room.participants);
       console.log(`Successfully joined a Room: ${room}`);
