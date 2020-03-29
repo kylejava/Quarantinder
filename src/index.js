@@ -41,7 +41,7 @@ async function joinRoom(roomName) {
     const room = await connect(TOKEN, { name: roomName, tracks: localTracks });
 
     room.localParticipant.audioTracks.forEach(audioTrack => {
-
+      audioTrack.on()
     });
 
     console.log(room.participants);
@@ -54,3 +54,15 @@ async function joinRoom(roomName) {
 
 const button = document.getElementById('join');
 button.onclick = () => joinRoom('test-room-1');
+
+// Get random joke using Dad joke API
+async function getJoke() {
+  const url = 'https://icanhazdadjoke.com/'
+  const res = await fetch(url, {
+    headers: { 'Accept': 'application/json' }
+  });
+  const { joke } = await res.json();
+  document.getElementById('joke-text').innerHTML = joke;
+}
+
+document.getElementById('joke-button').onclick = () => getJoke();
