@@ -1,6 +1,6 @@
 import { connect, createLocalTracks } from 'twilio-video';
 
-const TOKEN = '';
+const TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzNjNGUwMDVmZmM0MzdhNjQwZjI3YThmOTIyMjlkNDdjLTE1ODU0MjU0NjIiLCJpc3MiOiJTSzNjNGUwMDVmZmM0MzdhNjQwZjI3YThmOTIyMjlkNDdjIiwic3ViIjoiQUMyMWEwZTM2ZTMxZTBlODBjNzM5NDZiNmMzOGM1OWExMCIsImV4cCI6MTU4NTQyOTA2MiwiZ3JhbnRzIjp7ImlkZW50aXR5IjoidGVzdC1jbGllbnQtMiIsInZpZGVvIjp7InJvb20iOiJ0ZXN0LXJvb20tMSJ9fX0.HzUNF7-NHOtVKT_MIpRjtCDEfjv8TSkWSgYDCkIbSW8';
 
 function mountTracks(tracks, elementId) {
   const container = document.getElementById(elementId);
@@ -33,7 +33,7 @@ function configureRoomEventHandlers(room) {
 
 async function joinRoom(roomName) {
   try {
-    const localTracks = await createLocalTracks({ audio: false, video: { width: 640 } });
+    const localTracks = await createLocalTracks({ audio: true, video: { width: 640 } });
     mountTracks(localTracks, 'local');
     const room = await connect(TOKEN, { name: roomName, tracks: localTracks });
     console.log(room.participants);
