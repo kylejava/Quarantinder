@@ -66,6 +66,17 @@ let afterRoomConnect = room => {
     }
   }
 
+// Get random joke using Dad joke API
+async function getJoke() {
+  const url = 'https://icanhazdadjoke.com/'
+  const res = await fetch(url, {
+    headers: { 'Accept': 'application/json' }
+  });
+  const { joke } = await res.json();
+  document.getElementById('joke-text').innerHTML = joke;
+}
+
+document.getElementById('joke-button').onclick = () => getJoke();
 
 const button = document.getElementById('join');
 button.onclick = () => joinRoom('test-room-1');
