@@ -7,7 +7,6 @@ let afterRoomConnect = room => {
    
     room.participants.forEach(participantConnected);
     room.on('participantConnected', participantConnected);
-   
     room.on('participantDisconnected', participantDisconnected);
     room.once('disconnected', error => room.participants.forEach(participantDisconnected));
   };
@@ -27,7 +26,7 @@ let afterRoomConnect = room => {
         trackSubscribed(div, publication.track);
       }
     });
-   
+
     document.getElementById('remote').appendChild(div);
   }
    
