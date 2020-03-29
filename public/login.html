@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
   <head>
-    <title>Twilio Video Test</title>
-
+    <meta charset="utf-8">
+    <title>Welcome to Quarantinder</title>
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/index.css" type="text/css">
@@ -11,45 +11,44 @@
   </head>
   <body>
 
-    <!--REMINDER: Remember to change login.html to index.html --> 
     <div class="navbar navbar-dark bg-dark shadow-sm">
       <a class="navbar-brand"  href="/login.html">Quarantinder</a>
       <a class="p-2 text-light"href="/about.html">About</a>
     </div>
 
 
-    <div class="container mt-5">
-      <div class="row mx-auto"  style="width: 200px;">
-        <div class="col">
 
-          <div id="remote"></div>
-        </div>
-        <div class="col">
+    <div class = "container-fluid mt-5 mx-auto " style="width: 500px;" >
+      <div class="row mb-5 ml-1">
+        <h1>Welcome to Quarantinder!</h1>
+      </div>
 
-            <div id="local"></div>
+      <div class="card text-center" style="width: 30rem">
+        <div class="card-header ">
+          <h4>Create an Account</h4>
+          <form  action="/index.html">
+            <div class="form-group">
+              <input type="text" name="" class="form-control"placeholder="First Name">
+            </div>
+            <div class="form-group">
+              <input type="text" name="" class="form-control"placeholder="Last Name">
+            </div>
+            <div class="form-group">
+              <input type="text" name="" class="form-control"placeholder="Email Address">
+            </div>
+            <div class="form-group">
+              <input type="password" name="" class="form-control"placeholder="Password">
+            </div>
+            <button type="submit" name="button" class="btn btn-primary">Submit</button>
+
+
+
+          </form>
         </div>
       </div>
     </div>
 
-    <div class="container mt-5" >
-      <div class="row mx-auto" style="width: 300px;">
 
-          <button id="join">Join Room</button>
-          <button id="join" >Leave Room</button>
-          <button id="joke-button" onclick="getJoke()">Get Joke</button>
-      </div>
-      <div class="row mt-auto">
-        <p id="joke-text"></p>
-      </div>
-    </div>
-
-
-
-
-
-
-
-    <script src="index.js"></script>
     <!-- Boostrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
