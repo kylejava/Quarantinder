@@ -69,3 +69,10 @@ let afterRoomConnect = room => {
 
 const button = document.getElementById('join');
 button.onclick = () => joinRoom('test-room-1');
+
+notify = async ()=>{
+    await axios.get("https://localhost:3000/notify/" +  localStorage.getItem("phoneNumber"));
+    console.log("done");
+    document.getElementById('notify').remove();
+}
+document.getElementById('notify').onclick = notify;

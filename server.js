@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 
 const phoneNumbers = ["firstNumber", "+14807354762"]
 
-app.get("/:phone", (req, res)=>{
+app.get("/notify/:phone", (req, res)=>{
   let localnum = req.params.phone == phoneNumbers[0] ? phoneNumbers[1] : phoneNumbers[0];
   client.messages.create({
     body: "Hey someone is interested in you! Go check them out",
